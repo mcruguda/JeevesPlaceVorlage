@@ -1,0 +1,30 @@
+version: "1.0"
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=jeevesUser
+      - POSTGRES_PASSWORD=SuperSecret123
+      - POSTGRES_DB=jeevesDB
+    ports:
+      - "5432:5432"
+
+  phppgmyadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=cyrill.augustiny@ict.csbe.ch
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret123
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGUSER=jeevesUser
+      - PGPASSWORD=SuperSecret123
+    ports:
+      - "9200:80"
+
+volumes:
+  jeeves_db:
